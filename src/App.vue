@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <QuestionWidget />
-    <QuestionWidget />
+    <div style="width: 50%"><QuestionWidget /></div>
+    <div style="width: 50%"><Preview /></div>
   </div>
 </template>
 
 <script>
 import QuestionWidget from './QuestionWidget'
+import Preview from './Preview'
+
 export default {
   name: 'App',
   components: {
-    QuestionWidget
+    QuestionWidget,
+    Preview
   }
 }
 </script>
