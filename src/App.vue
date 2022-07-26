@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <QuestionWidget />
+    <QuestionWidget />
   </div>
 </template>
 
 <script>
+import QuestionWidget from './QuestionWidget'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    QuestionWidget
+  }
 }
 </script>
 
@@ -16,8 +20,9 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 </style>
