@@ -25,7 +25,7 @@ const mutations = {
   addOption(state, option){
     const alphabet = "A";
     const clonedOptions = JSON.parse(JSON.stringify(state.options))
-    clonedOptions.push({alphabet, name: option, id: uuid()})
+    clonedOptions.push({alphabet, correct: false, name: option, id: uuid()})
     state.options = reOrderAlphabets(clonedOptions)
   },
   removeOption(state, option){
@@ -39,25 +39,13 @@ const mutations = {
     state.option = option
   },
   updateOption(state, option){
-    const optionIndex = state.options.findIndex(
-      (optionItem) => {
-        console.log(optionItem, option)
-        return optionItem.id === option.id
-      }
-    );
-    console.log(optionIndex)
-    if(optionIndex !== -1){
-      const updatedOption = {
-        ...state.options[optionIndex],
-        ...option,
-      };
-      const updatedOptions = [
-        ...state.options.slice(0, optionIndex),
-        updatedOption,
-        ...state.options.slice(optionIndex + 1),
-      ];
-      state.options = updatedOptions
-    }
+    state.options = updateOptions(state.options, option)
+  },
+  setCorrectOption(state, option){
+    let clonedOptions = JSON.parse(JSON.stringify(state.options))
+    clonedOptions = clonedOptions.map(option => ({...option, correct: false}))
+    state.options = updateOptions(clonedOptions, {...option, correct: true})
+    console.log(state.options)
   }
 }
 
@@ -73,6 +61,27 @@ function reOrderAlphabets(options){
     console.log(alphabet)
     return {...option, alphabet}
   })
+}
+
+function updateOptions(options, option) {
+  const optionIndex = options.findIndex(
+    (optionItem) => {
+      console.log(optionItem, option)
+      return optionItem.id === option.id
+    }
+  );
+  console.log(optionIndex)
+  if(optionIndex !== -1){
+    const updatedOption = {
+      ...options[optionIndex],
+      ...option,
+    };
+    return [
+      ...options.slice(0, optionIndex),
+      updatedOption,
+      ...options.slice(optionIndex + 1),
+    ];
+  }
 }
 
 Vue.use(Vuex)
