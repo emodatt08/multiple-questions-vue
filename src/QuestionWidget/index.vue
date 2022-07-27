@@ -14,6 +14,12 @@
     components: {
       Options,
       Question
-    }
+    },
+    // methods: {
+    //   onQuestionAdded (value) {
+    //     console.log("emit", value)
+    //     this.$emit("questionAdded", value)
+    //   }
+    // }
   }
 </script>

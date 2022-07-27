@@ -1,31 +1,32 @@
 <template>
-  <div id="question">
-    Question
-    <textarea name="question" rows="10" id="question-input" placeholder="Enter question"></textarea>
-    <button id="question-btn">Save Question</button>
+  <div class="flex flex-col">
+    <label for="question" class="font-bold">Question</label>
+    <textarea 
+    class="border border-1 border-gray-300 '
+    rounded-lg p-2 shadow-sm
+    focus:outline-none resize-none"
+    name="question" 
+    v-model="question" 
+    @keyup="addQuestion" 
+    rows="10" 
+    placeholder="Enter question">
+    </textarea>
   </div>
 </template>
 
 <script>
     export default {
-        name: 'Question'
+        name: 'Question',
+        data: function () {
+            return {
+                question: "",
+            }
+        },
+        methods: {
+            addQuestion: function () {
+                console.log(this.$store)
+                this.$store.commit('addQuestion', this.question)
+            }
+        }
     }
 </script>
-
-<style>
-    #question {
-        display: flex;
-        flex-direction: column;
-    }
-    #question-input {
-        padding: 5px
-    }
-
-    #question-btn {
-        padding:8px 0;
-        margin-top: 10px;
-        background-color: rgb(170, 170, 238);
-        border: transparent;
-        border-radius: 5px;
-    }
-</style>
