@@ -24,9 +24,13 @@
                 <div>{{option.name}}</div>
                 <div>
                     <button @click="onSetActiveOption(option)">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-pencil text-blue-500 mr-1"></i>
                     </button>
-                    <button @click="onRemoveOption(option)">Remove</button>
+                    <button @click="onRemoveOption(option)">
+                        <i class="fa fa-trash text-red-500 mr-1"></i>
+                    </button>
+                    <input type="radio" name="correct" 
+                    @change="onSetCorrectOption(option)" />
                 </div>
             </div>
         </div>
@@ -85,6 +89,9 @@
                 this.$store.commit('setActiveOption', option)
                 this.activeOptionName = option.name
                 this.activeOption = option
+            },
+            onSetCorrectOption(option) {
+                this.$store.commit('setCorrectOption', option)
             }
         }
     }
